@@ -52,8 +52,27 @@ public class AuthController {
 
 
     @GetMapping("/get-all")
-    @PreAuthorize("hasAuthority('ROLE_USER')")
+    @PreAuthorize("hasAuthority('ROLE_USER')")//todo should have in database ROLE_USER  instead USER
     public List<User> getAllUser() {
         return userRepository.findAll();
     }
+
+    //https://stackoverflow.com/questions/42146110/when-should-i-prefix-role-with-spring-security
+    //10
+    //
+    //Automatic ROLE_ prefixing
+    //As Spring Security 3.x to 4.x migration guide states:
+    //
+    //Spring Security 4 automatically prefixes any role with ROLE_. The changes were made as part of SEC-2758
+    //
+    //With that being said, the ROLE_ prefix in the following annotation is redundant:
+    //
+    //@PreAuthorize("hasRole('ROLE_USER')")
+    //Since you're calling hasRole method, the fact that you're passing a role is implied. Same is true for the following expression:
+    //
+    //antMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
+    //But for the:
+    //
+    //new SimpleGrantedAuthority("ROLE_ADMIN")
+    //Since this is an authority, not a role, you should add the ROLE_ prefix (If your intent is to create a role!). Same is true for calling public InMemoryUserDetailsManager(Properties users) constructor, since it's using an authority internally.
 }

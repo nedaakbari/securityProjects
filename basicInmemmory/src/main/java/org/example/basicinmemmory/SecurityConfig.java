@@ -61,6 +61,12 @@ public class SecurityConfig {
 //                .and().formLogin()
 //                .and().build();
 //    }
+
+        //http
+        //    .httpBasic()
+        //    .and()
+        //    .authorizeRequests()
+        //    .antMatchers(HttpMethod.POST, "/books").hasRole("ADMIN")
     }
 
     // Password Encoding
@@ -69,4 +75,14 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
+    //SecurityContext securityContext = new SecurityContextImpl();
+    //final Properties users = new Properties();
+    //users.put("joe","secret,ADMIN,enabled");            <-- here
+    //InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager(users);
+
+    //Collection<GrantedAuthority> grantedAuthorities = new ArrayList<GrantedAuthority>();
+    //grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));         <-- here
+    //AnonymousAuthenticationToken anonymousAuthenticationToken = new AnonymousAuthenticationToken("test", manager.loadUserByUsername("joe"), grantedAuthorities);
+    //        securityContext.setAuthentication(anonymousAuthenticationToken);
+    //        SecurityContextHolder.setContext(securityContext);
 }

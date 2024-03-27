@@ -45,7 +45,7 @@ public class SecurityConfig {
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> {
                     auth.requestMatchers("/error/**").permitAll();
-                    auth.requestMatchers("/api/auth/**").permitAll();
+                    auth.requestMatchers("/api/auth/**").authenticated();
                     auth.anyRequest().authenticated();
                 })
                 .userDetailsService(userDetailsService)
